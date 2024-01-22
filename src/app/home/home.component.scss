@@ -1,0 +1,17 @@
+// src/app/home/home.component.scss
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; // 100% of the viewport height
+}
+
+.form-group {
+  width: 300px; // Adjust the width as needed
+  margin-bottom: 15px;
+}
+
+button {
+  width: 100%; // Make the button full width of its container
+}
