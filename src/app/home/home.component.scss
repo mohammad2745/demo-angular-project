@@ -1,17 +1,51 @@
 // src/app/home/home.component.scss
+.container {
+  height: 100vh;
+  margin-top: 5%;
+}
+
+hr {
+  margin-right: auto;
+  margin-top: 2px;
+  width: 90px;
+  color: #0d6efd;
+}
+
 .form-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh; // 100% of the viewport height
+  // height: 100vh; 
+  padding: 95px;
+  padding-top: 50px;
+  background-color: rgb(253, 255, 254);
+  // border: 1px solid black;
+}
+
+.info {
+  width: 100%;
+}
+
+.info h3, p {
+  text-align: left;
+}
+
+.form-input {
+  width: 100%;
 }
 
 .form-group {
-  width: 300px; // Adjust the width as needed
+  width: 300px; 
   margin-bottom: 15px;
+  background-color: #FFFFFF;
+  width: 100%;
 }
 
 button {
-  width: 100%; // Make the button full width of its container
+  width: 100%; 
 }
+
+// #intro {
+//   text-align: left;
+// }
