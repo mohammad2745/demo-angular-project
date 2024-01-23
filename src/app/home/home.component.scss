@@ -25,10 +25,18 @@ hr {
 
 .info {
   width: 100%;
+  h3, p {
+    text-align: left;
+    a {
+      color: #37598f;
+    }  
+  }
 }
 
-.info h3, p {
-  text-align: left;
+
+.submit-btn {
+  color: #FFFFFF;
+  background-color: rgba(37,73,169,255);
 }
 
 .form-input {
