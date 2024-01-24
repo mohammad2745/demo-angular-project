@@ -7,8 +7,11 @@
 hr {
   margin-right: auto;
   margin-top: 2px;
-  width: 90px;
-  color: #0d6efd;
+  width: 55px;
+  color: #809fe5;
+  background-color: #809fe5;
+  height: 2px;
+  opacity: 1;
 }
 
 .form-container {
@@ -30,6 +33,9 @@ hr {
     a {
       color: #37598f;
     }  
+  }
+  p {
+    color: #5e6162;
   }
 }
 

@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const personRoutes = require('./routes/personContactRoutes');
 const app = express();
 
@@ -8,6 +9,7 @@ const PORT = 3000;
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 
 // Routes
 app.use('/', personRoutes);
