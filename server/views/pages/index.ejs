@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      background-color: #007bff;
+      padding: 10px 0;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .edit, .delete {
+      display: inline-block;
+      padding: 5px 10px;
+      margin: 2px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      background-color: #28a745;
+      color: #ffffff;
+      border-radius: 3px;
+    }
+
+    footer {
+      background-color: #007bff;
+      padding: 10px 0;
+      text-align: center;
+      color: #ffffff;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="container">
+
+<header>
+  <h1>Person Messages</h1>
+</header>
+
+<main>
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let info of data) { %>
+        <tr>
+          <td><%= info.email %></td>
+          <td><%= info.message %></td>
+          <td>
+            <!-- <a href="#" class="edit" onclick="editRecord('<%= info.id %>')" style="text-decoration: none;">Edit</a> -->
+            <button class="edit-btn" onclick="location.href='/admin/<%= info.id %>'">Edit</button>
+            <button class="delete-btn" onclick="deleteData('<%= info.id %>')">Delete</button>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</main>
+
+<!-- <footer>
+  <p>&copy; 2024 Your Company Name</p>
+</footer> -->
+
+<script>
+  function deleteData(id) {
+    const confirmDelete = confirm("Are you sure you want to delete this data?");
+    
+    if (confirmDelete) {
+      // You can implement the logic for making a DELETE request to the server here
+      window.location.href = '/admin/delete/' + id;
+    }
+  }
+</script>
+
+</body>
+</html>

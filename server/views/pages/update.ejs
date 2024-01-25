@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="/update-style.css">
+</head>
+<body class="container">
+
+<header>
+  <h1>Person Messages</h1>
+</header>
+
+<main>
+  <form action="/admin/update/<%= person.id %>" method="POST">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" value="<%= person.email %>" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required><%= person.message %></textarea>
+
+    <button type="submit">Update</button>
+  </form>
+</main>
+
+</body>
+</html>
