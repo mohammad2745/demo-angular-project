@@ -135,19 +135,46 @@ exports.delete = async (req, res) => {
   }
 
   try {
-    PersonContact.deletePersonContact(id, (deleteErr, deleteData) => {
-      if(deleteErr) {
+    PersonContact.getPersonContactById(id, (err, data) => {
+      if(err) {
         return res.status(500).send({
         message: "Some error occurred while deleting data.",
         // message: err.message || "Some error occurred while deleting data.",
       });
     }
-      res.redirect('/admin')
+      // res.redirect('/admin');
+      res.render('pages/delete', { person: data[0] });
     });
   } catch (err) {
     return res.status(400).send({
       message: "Some error occurred while deleting data.",
       // message: err.message || "Some error occurred while deleting data.",
+    });
+  }
+};
+
+exports.deleteConfirm = async (req, res) => {
+  const id = req.params.id;
+
+  if (!id) {
+    res.status(400).send({
+      message: "ID is required for deletion.",
+    });
+    return;
+  }
+
+  try {
+    PersonContact.deletePersonContact(id, (err, data) => {
+      if(err) {
+        return res.status(500).send({
+        message: "Some error occurred while deleting data.",
+      });
+    }
+      res.redirect('/admin');
+    });
+  } catch (err) {
+    return res.status(400).send({
+      message: "Some error occurred while deleting data.",
     });
   }
 };

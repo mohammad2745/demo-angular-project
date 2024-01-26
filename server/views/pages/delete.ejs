@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  <link rel="stylesheet" href="/update-style.css">
+</head>
+<body class="container">
+
+<header>
+  <h1>Person Messages</h1>
+</header>
+
+<main>
+  <form action="/admin/delete-confirm/<%= person.id %>?_method=DELETE" method="POST">
+    <label for="">Do you want to delete?</label>
+    <button type="submit">Delete</button>
+  </form>
+</main>
+
+</body>
+</html>
