@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PersonContactService {
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:3000/admin';
 
   constructor(private http: HttpClient) { }
 

@@ -43,40 +43,47 @@ exports.create = async (req, res) => {
 
 
 exports.index = async (req, res) => {
+  console.log("flasjdfkljsad");
   try {
     PersonContact.getPersonContact((err, data) => {
+      // console.log("Data ", data);
       if (err) {
-        return res.status(500).send({
-          message: "Some error occurred while all fetching data.",
-          // message: err.message || "Some error occurred while fetching data.",
+        res.status(500).send({
+          message: err.message || "Some error occurred while getting all persons message.",
+        });
+      } else {
+        res.status(200).send({
+          message: 'Get data successful',
+          data: data
         });
       }
-      res.render('pages/index', {data})
     });
   } catch (err) {
     res.status(400).send({
-      message: "Something went wrong fetching all contact",
-      // message: err.stack || "Something went wrong fetching all contact",
+      message: err.stack || "Something went wrong getting all data"
     });
   }
 };
 
 exports.view = async (req, res) => {
+  console.log("viewing...");
   const id = req.params.id;
   try {
     PersonContact.getPersonContactById(id, (err, data) => {
       if (err) {
-        return res.status(500).send({
-          message: "Some error occurred while fetching data.",
-          // message: err.message || "Some error occurred while fetching data.",
+        res.status(500).send({
+          message: err.message || "Some error occurred while getting the person message.",
+        });
+      } else {
+        res.status(200).send({
+          message: 'Get data successful',
+          data: data
         });
       }
-      res.render('pages/update', { person: data[0] });
     });
   } catch (err) {
     res.status(400).send({
-      message: "Something went wrong fetching contact",
-      // message: err.stack || "Something went wrong fetching contact",
+      message: err.stack || "Something went wrong getting data by id"
     });
   }
 };
@@ -109,17 +116,19 @@ exports.update = async (req, res) => {
 
     PersonContact.updatePersonContact(id, updatedPersonContact, (err, data) => {
       if (err) {
-        return res.status(500).send({
-          message: "Some error occurred while updating data.",
-          // message: err.message || "Some error occurred while updating data.",
+        res.status(500).send({
+          message: err.message || "Some error occurred while updating the person contact.",
+        });
+      } else {
+        res.status(200).send({
+          message: 'Update successful',
+          data: data,
         });
       }
-      res.redirect('/admin');
     });
   } catch (err) {
-    return res.status(400).send({
-      message: "Some error occurred while updating data.",
-      // message: err.message || "Some error occurred while updating data.",
+    res.status(400).send({
+      message: err.stack || "Something went wrong updating data",
     });
   }
 };
@@ -136,18 +145,48 @@ exports.delete = async (req, res) => {
 
   try {
     PersonContact.deletePersonContact(id, (deleteErr, deleteData) => {
-      if(deleteErr) {
-        return res.status(500).send({
-        message: "Some error occurred while deleting data.",
-        // message: err.message || "Some error occurred while deleting data.",
-      });
-    }
-      res.redirect('/admin')
+      if (deleteErr) {
+        res.status(500).send({
+          message: deleteErr.message || "Some error occurred while deleting the person message.",
+        });
+      } else {
+        res.status(200).send({
+          message: 'Data delete successful',
+          data: deleteData
+        });
+      }
+    });
+    PersonContact.getPersonContactById(id, (err, data) => {
+      if (err) {
+        res.status(500).send({
+          message: err.message || "Error checking for the existence of the record.",
+        });
+      } else {
+        if (!data || data.length === 0) {
+          res.status(404).send({
+            message: `No record found.`,
+          });
+        } else {
+          // Proceed with deletion
+          PersonContact.deletePersonContact(id, (deleteErr, deleteData) => {
+            res.redirect('/admin')
+            if (deleteErr) {
+              res.status(500).send({
+                message: deleteErr.message || "Some error occurred while deleting the person message.",
+              });
+            } else {
+              res.status(200).send({
+                message: 'Data delete successful',
+                data: deleteData
+              });
+            }
+          });
+        }
+      }
     });
   } catch (err) {
-    return res.status(400).send({
-      message: "Some error occurred while deleting data.",
-      // message: err.message || "Some error occurred while deleting data.",
+    res.status(400).send({
+      message: err.stack || "Something went wrong deleting data"
     });
   }
 };
